@@ -1,0 +1,24 @@
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("/fonts/JetBrainsMono-Regular.ttf");
+  font-weight: 400;
+  font-style: normal;
+}
+
+body {
+  height: 100%;
+  width: 100%;
+  min-height: 100vh;
+  margin: 0px !important;
+
+  background-color: #fafafa;
+}
+
+* {
+  font-family: "JetBrains Mono", monospace;
+}
+
+/*:not(div, img) {
+  filter: invert(100%);
+}
+*/

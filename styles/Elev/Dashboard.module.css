@@ -1,0 +1,90 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+
+  padding-top: 20px;
+  padding-right: 30px;
+  margin-left: 270px;
+}
+
+.chartContainer {
+  border: 1px solid rgb(222, 222, 222);
+  position: relative;
+  width: 45vw;
+}
+
+/* "imi pun un vivaldi ca o iau razna" */
+
+.lastUpdates {
+  display: flex;
+  flex-direction: column;
+
+  gap: 30px;
+  width: calc(100% - 45vw - 2% - 80px);
+  padding: 2%;
+  margin-left: 16px;
+  text-align: center;
+
+  border: 1px solid rgb(222, 222, 222);
+  border-radius: 0.33rem;
+
+  padding-right: 32px;
+}
+
+.cresteMedie {
+  overflow-y: scroll;
+  scrollbar-width: thin;
+
+  display: flex;
+  flex-direction: column;
+
+  width: calc(100% - 45vw - 2% - 80px);
+  height: calc(76px * 4);
+
+  gap: 30px;
+  padding: 2%;
+  text-align: center;
+
+  border: 1px solid rgb(222, 222, 222);
+  border-radius: 0.33rem;
+
+  padding-right: 32px;
+}
+
+.lastUpdatesContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+@media (max-width: 1200px) {
+  .chartContainer {
+    display: none;
+  }
+  .lastUpdates {
+    width: 100%;
+    margin: 0;
+  }
+  .cresteMedie {
+    width: 100%;
+    margin: 0;
+  }
+}
+
+@media (max-width: 500px) {
+  .chartContainer {
+    display: none;
+  }
+  .container {
+    margin-left: 80px;
+    flex-direction: column;
+  }
+  .lastUpdates {
+    width: calc(100% - 60px);
+    padding: 20px;
+  }
+  .cresteMedie {
+    width: calc(100% - 60px);
+    padding: 20px;
+  }
+}
