@@ -46,7 +46,7 @@ export default function Clasa() {
   }
 
   if (!incarcat) {
-    return <div></div>;
+    return <Navbar url={"none"} />;
   }
 
   return (
