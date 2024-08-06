@@ -1,4 +1,4 @@
-import { supabase } from "@/utils/database/supabase";
+import { admin_supabase } from "@/utils/database/supabase";
 
 let users = [];
 let clase = [];
@@ -12,13 +12,13 @@ export default async function handler(req, res) {
       return;
     }
 
-    const { data, error } = await supabase.auth.getUser(token);
+    const { data, error } = await admin_supabase.auth.getUser(token);
     if (error) {
       console.log(token, error.message);
       res.status(401).json({ error: "Invalid credentials." });
     }
 
-    const { data: userData } = await supabase
+    const { data: userData } = await admin_supabase
       .from("user_data")
       .select("*")
       .eq("id", data.user.id)
@@ -30,7 +30,7 @@ export default async function handler(req, res) {
       return;
     }
 
-    const { data: clasa } = await supabase
+    const { data: clasa } = await admin_supabase
       .from("clase")
       .select("*")
       .eq("id", userData.clasa)

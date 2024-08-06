@@ -1,18 +1,17 @@
-import { supabase } from "@/utils/database/supabase";
+import { admin_supabase } from "@/utils/database/supabase";
 
 export default async function handler(req, res) {
   try {
     let { email, password } = req.body;
     email = email.trim();
 
-    const { data, error } = await supabase.auth.signInWithPassword({
+    const { data, error } = await admin_supabase.auth.signInWithPassword({
       email: email,
       password: password,
     });
 
     if (data.user != null) {
-      console.log(data.user.id);
-      const { data: userData, error: userError } = await supabase
+      const { data: userData, error: userError } = await admin_supabase
         .from("user_data")
         .select("*")
         .eq("id", data.user.id)

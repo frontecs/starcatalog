@@ -1,9 +1,9 @@
-import { supabase } from "@/utils/database/supabase";
+import { admin_supabase } from "@/utils/database/supabase";
 
 export default async function handler(req, res) {
   try {
     const { token } = req.body;
-    const { error } = await supabase.auth.getUser(token);
+    const { error } = await admin_supabase.auth.getUser(token);
     if (error) {
       res.status(401).json({ error: "Invalid credentials." });
     }
