@@ -13,6 +13,8 @@ export default function Clasa() {
   const [elevViewLoaded, setElevViewLoaded] = useState(false);
   const [incarcat, setIncarcat] = useState(false);
 
+  const [materii, setMaterii] = useState([]);
+
   useEffect(() => {
     const queryParams = new URLSearchParams(window.location.search);
     const clasa = queryParams.get("clasa");
@@ -31,6 +33,18 @@ export default function Clasa() {
         setElevi(data.elevi);
 
         setIncarcat(true);
+      });
+
+    fetch("/api/profesor/materiiDisponibile", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        token: localStorage.getItem("access_token"),
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setMaterii(Object.values(data.materii));
       });
   }, []);
 
@@ -59,14 +73,15 @@ export default function Clasa() {
         {elevi.map((elev) => (
           <>
             <ElevView
-              key={elev.id}
+              key={`${elev.id}-view`}
               id={elev.id}
               nume={`${elev.nume} ${elev.prenume}`}
               medie={`${elev.medie}`}
               state={setElevViewLoaded}
+              materii={materii}
             />
             <LongButton
-              key={elev.id}
+              key={`${elev.id}-button`}
               title={`${elev.nume} ${elev.prenume}`}
               subtitle={`Medie: ${elev.medie}`}
               buttonText={"Acceseaza"}

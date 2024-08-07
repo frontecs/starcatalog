@@ -1,5 +1,6 @@
-import { admin_supabase } from "@/utils/database/supabase";
+import { getNumeMaterii } from "@/utils/elev/nume_materii";
 import { isProfesor } from "@/utils/profesor/validareProfesor";
+
 export default async function handler(req, res) {
   try {
     const { token } = req.headers;
@@ -7,7 +8,9 @@ export default async function handler(req, res) {
       throw { type: "CredentialsSignin" };
     }
 
-    res.status(200).json({ test: "true" });
+    const nume_materii = getNumeMaterii();
+
+    res.status(200).json({ materii: nume_materii });
   } catch (error) {
     if (error.type === "CredentialsSignin") {
       res.status(401).json({ error: "Invalid credentials." });

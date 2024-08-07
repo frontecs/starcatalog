@@ -38,9 +38,18 @@
   height: 26px;
 
   transition: 0.3s;
+
+  -webkit-tap-highlight-color: transparent;
 }
 
 .close:hover {
   border-color: red;
   border-radius: 0% 20% 50% 50%;
+}
+
+@media (max-width: 500px) {
+  .close {
+    top: 10px;
+    right: calc(-1rem + 30px);
+  }
 }

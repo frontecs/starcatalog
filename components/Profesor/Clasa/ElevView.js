@@ -1,5 +1,5 @@
 import styles from "@/styles/Profesor/ElevView.module.css";
-export default function ElevView({ id, nume, medie, state }) {
+export default function ElevView({ id, nume, medie, state, materii }) {
   function hideView() {
     const elev = document.getElementById(`elevview-${id}`);
     elev.style.opacity = 0;
@@ -20,6 +20,16 @@ export default function ElevView({ id, nume, medie, state }) {
         </div>
         <h1 style={{ marginBottom: 0 }}>{nume}</h1>
         <p>Medie Generala: {medie}</p>
+        <p>
+          Alege o materie:{" "}
+          <select name="materie" id={`${id}-materie`}>
+            {materii.map((materie) => (
+              <option key={materie} value={materie}>
+                {materie}
+              </option>
+            ))}
+          </select>
+        </p>
       </div>
     </>
   );
