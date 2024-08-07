@@ -43,7 +43,6 @@ export default function Navbar({ url }) {
           localStorage.removeItem("access_token");
           router.push("/login");
         } else {
-          console.log("Iau date");
           fetch("/api/user/getUserNameFromToken", {
             method: "GET",
             headers: {

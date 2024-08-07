@@ -4,10 +4,6 @@ import { isProfesor } from "@/utils/profesor/validareProfesor";
 export default async function handler(req, res) {
   const { token, id } = req.headers;
 
-  if (!token) {
-    return res.status(400).json({ error: "Missing token." });
-  }
-
   if (!isProfesor(token)) {
     return res.status(401).json({ error: "Invalid credentials." });
   }

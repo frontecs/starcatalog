@@ -5,7 +5,7 @@ export default async function handler(req, res) {
   try {
     const { token } = req.headers;
     if (!isProfesor(token)) {
-      throw { type: "CredentialsSignin" };
+      return res.status(401).json({ error: "Invalid credentials." });
     }
 
     const { data: clase, error: error2 } = await admin_supabase

@@ -3,7 +3,7 @@ import Link from "next/link";
 export default function LongButton({
   title,
   subtitle,
-  buttonText,
+  buttonText = "",
   func,
   islink = false,
 }) {

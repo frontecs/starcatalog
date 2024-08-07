@@ -14,7 +14,7 @@ export default function Clasa() {
   const [incarcat, setIncarcat] = useState(false);
 
   const [materii, setMaterii] = useState([]);
-  const [materie, setMaterie] = useState([]);
+  const [materie, setMaterie] = useState("");
 
   useEffect(() => {
     const queryParams = new URLSearchParams(window.location.search);
@@ -46,6 +46,7 @@ export default function Clasa() {
       .then((res) => res.json())
       .then((data) => {
         setMaterii(Object.values(data.materii));
+        setMaterie(Object.values(data.materii)[0]);
       });
   }, []);
 
@@ -53,11 +54,8 @@ export default function Clasa() {
     if (elevViewLoaded) return;
     setElevViewLoaded(true);
 
-    const elev = document.getElementById(`elevview-${id}`);
-    elev.style.display = "flex";
-    setTimeout(() => {
-      elev.style.opacity = 1;
-    }, 1);
+    const event = new CustomEvent(`elevViewLoaded-${id}`, { detail: id });
+    dispatchEvent(event);
   }
 
   if (!incarcat) {

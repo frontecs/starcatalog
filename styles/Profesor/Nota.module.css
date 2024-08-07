@@ -1,0 +1,36 @@
+.buttonContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px rgb(222, 222, 222) solid;
+  border-radius: 0.33rem;
+  padding: 0px 7px;
+}
+
+.button {
+  margin-left: 7px;
+
+  margin: 3px;
+  height: 35px;
+
+  display: flex;
+  align-items: center;
+  padding-left: 7px;
+  padding-right: 7px;
+
+  background-color: rgb(251, 249, 250);
+  border: 1px rgb(222, 222, 222) solid;
+  color: black;
+
+  border-radius: 0.33rem;
+  transition: 0.2s;
+
+  user-select: none;
+}
+
+.button:hover {
+  background-color: #333;
+  border: 1px gray solid;
+  color: white;
+  cursor: pointer;
+}
