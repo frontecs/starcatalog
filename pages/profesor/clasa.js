@@ -59,6 +59,7 @@ export default function Clasa() {
         {elevi.map((elev) => (
           <>
             <ElevView
+              key={elev.id}
               id={elev.id}
               nume={`${elev.nume} ${elev.prenume}`}
               medie={`${elev.medie}`}

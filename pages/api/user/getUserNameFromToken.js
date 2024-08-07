@@ -1,13 +1,12 @@
 import { admin_supabase } from "@/utils/database/supabase";
 
-const cache = {};
+let cache = {};
 
 export default async function handler(req, res) {
   try {
     const { token } = req.headers;
 
     if (cache[token]) {
-      console.log("Cache hit");
       return res.status(200).json(cache[token]);
     }
 
@@ -50,3 +49,8 @@ export default async function handler(req, res) {
     }
   }
 }
+
+setInterval(() => {
+  console.log("getUsernameFromToken.js: Clearing cache");
+  cache = {};
+}, 1000 * 60 * 60 * 1); // one time per hour
