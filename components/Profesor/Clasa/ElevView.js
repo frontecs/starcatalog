@@ -1,13 +1,27 @@
 import styles from "@/styles/Profesor/ElevView.module.css";
-export default function ElevView({ id, nume, medie, state, materii }) {
+export default function ElevView({
+  id,
+  nume,
+  medie,
+  setElevViewLoaded,
+  materie,
+  setMaterie,
+  materii,
+}) {
   function hideView() {
     const elev = document.getElementById(`elevview-${id}`);
     elev.style.opacity = 0;
     setTimeout(() => {
       elev.style.display = "none";
     }, 300);
-    state(false);
+    setElevViewLoaded(false);
   }
+
+  function onMaterieChange(e) {
+    const materie = e.target.value;
+    setMaterie(materie);
+  }
+
   return (
     <>
       <div id={`elevview-${id}`} className={styles.container}>
@@ -22,7 +36,12 @@ export default function ElevView({ id, nume, medie, state, materii }) {
         <p>Medie Generala: {medie}</p>
         <p>
           Alege o materie:{" "}
-          <select name="materie" id={`${id}-materie`}>
+          <select
+            name="materie"
+            id={`${id}-materie`}
+            onChange={(e) => onMaterieChange(e)}
+            value={materie}
+          >
             {materii.map((materie) => (
               <option key={materie} value={materie}>
                 {materie}

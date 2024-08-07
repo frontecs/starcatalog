@@ -14,6 +14,7 @@ export default function Clasa() {
   const [incarcat, setIncarcat] = useState(false);
 
   const [materii, setMaterii] = useState([]);
+  const [materie, setMaterie] = useState([]);
 
   useEffect(() => {
     const queryParams = new URLSearchParams(window.location.search);
@@ -77,7 +78,9 @@ export default function Clasa() {
               id={elev.id}
               nume={`${elev.nume} ${elev.prenume}`}
               medie={`${elev.medie}`}
-              state={setElevViewLoaded}
+              setElevViewLoaded={setElevViewLoaded}
+              materie={materie}
+              setMaterie={setMaterie}
               materii={materii}
             />
             <LongButton
