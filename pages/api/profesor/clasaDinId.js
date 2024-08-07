@@ -17,7 +17,8 @@ export default async function handler(req, res) {
     let { data: elevi, error: error3 } = await admin_supabase
       .from("user_data")
       .select("*")
-      .eq("clasa", id);
+      .eq("clasa", id)
+      .order("nume", { ascending: true });
 
     for (let i = 0; i < elevi.length; i++) {
       const medie = await getmedie(elevi[i].id);
