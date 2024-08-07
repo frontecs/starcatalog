@@ -1,21 +1,20 @@
 import { admin_supabase } from "@/utils/database/supabase";
 
-let users = [];
-let clase = [];
+const cache = {};
 
 export default async function handler(req, res) {
   try {
-    const { token } = req.body;
+    const { token } = req.headers;
 
-    if (users[token] && clase[token]) {
-      res.status(200).json({ nume: users[token], clasa: clase[token] });
-      return;
+    if (cache[token]) {
+      console.log("Cache hit");
+      return res.status(200).json(cache[token]);
     }
 
     const { data, error } = await admin_supabase.auth.getUser(token);
     if (error) {
       console.log(token, error.message);
-      res.status(401).json({ error: "Invalid credentials." });
+      return res.status(401).json({ error: "Invalid credentials." });
     }
 
     const { data: userData } = await admin_supabase
@@ -25,27 +24,29 @@ export default async function handler(req, res) {
       .single();
 
     let name = `${userData.prenume} ${userData.nume}`;
-    if (userData.materie.length != 0) {
-      res.status(200).json({ nume: name, clasa: "Profesor" });
-      return;
+    let response;
+
+    if (userData.materie.length !== 0) {
+      response = { nume: name, clasa: "Profesor" };
+    } else {
+      const { data: clasa } = await admin_supabase
+        .from("clase")
+        .select("*")
+        .eq("id", userData.clasa)
+        .single();
+
+      response = { nume: name, clasa: clasa.nume };
     }
 
-    const { data: clasa } = await admin_supabase
-      .from("clase")
-      .select("*")
-      .eq("id", userData.clasa)
-      .single();
+    cache[token] = response;
 
-    users[token] = name;
-    clase[token] = clasa.nume;
-
-    res.status(200).json({ nume: name, clasa: clasa.nume });
+    return res.status(200).json(response);
   } catch (error) {
     if (error.type === "CredentialsSignin") {
-      res.status(401).json({ error: "Invalid credentials." });
+      return res.status(401).json({ error: "Invalid credentials." });
     } else {
       console.log(error);
-      res.status(500).json({ error: "Something went wrong." });
+      return res.status(500).json({ error: "Something went wrong." });
     }
   }
 }

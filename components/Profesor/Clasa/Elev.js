@@ -1,3 +1,4 @@
+import LongButton from "@/components/LongButton";
 export default function Elev({ nume, prenume, medie }) {
   return (
     <div>

@@ -31,11 +31,11 @@ export default function Navbar({ url }) {
     }
 
     fetch("/api/user/checkvalid", {
-      method: "POST",
+      method: "GET",
       headers: {
         "Content-Type": "application/json",
+        token: localStorage.getItem("access_token"),
       },
-      body: JSON.stringify({ token: localStorage.getItem("access_token") }),
     })
       .then((res) => res.json())
       .then((data) => {
@@ -45,13 +45,11 @@ export default function Navbar({ url }) {
         } else {
           console.log("Iau date");
           fetch("/api/user/getUserNameFromToken", {
-            method: "POST",
+            method: "GET",
             headers: {
               "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
               token: localStorage.getItem("access_token"),
-            }),
+            },
           })
             .then((res) => res.json())
             .then((data) => {
@@ -60,7 +58,7 @@ export default function Navbar({ url }) {
             });
         }
       });
-  }, [url]);
+  }, [url, router]);
 
   return (
     <div className={styles.container}>

@@ -29,11 +29,11 @@ export default function Navbar({ url }) {
     icon.style.filter = "invert(1)";
 
     fetch("/api/user/checkvalid", {
-      method: "POST",
+      method: "GET",
       headers: {
         "Content-Type": "application/json",
+        token: localStorage.getItem("access_token"),
       },
-      body: JSON.stringify({ token: localStorage.getItem("access_token") }),
     })
       .then((res) => res.json())
       .then((data) => {
@@ -45,10 +45,8 @@ export default function Navbar({ url }) {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
               token: localStorage.getItem("access_token"),
-            }),
+            },
           })
             .then((res) => res.json())
             .then((data) => {
@@ -57,7 +55,7 @@ export default function Navbar({ url }) {
             });
         }
       });
-  }, [url]);
+  }, [router]);
 
   return (
     <>

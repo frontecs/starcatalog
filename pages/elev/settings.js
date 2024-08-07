@@ -45,7 +45,7 @@ export default function Settings() {
           isEnabled={(setIsToggled, setIsDisabled) => {
             useEffect(() => {
               daShareMedie(setIsToggled, setIsDisabled);
-            }, []);
+            }, [daShareMedie]);
           }}
           func={(on, setIsToggled, setIsDisabled) => {
             setIsDisabled(true);

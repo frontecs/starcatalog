@@ -24,7 +24,7 @@ export default function Dashboard() {
       .catch((error) => {
         router.push("/login");
       });
-  }, []);
+  }, [router]);
   return (
     <div style={{ width: "100vw", height: "100vh" }}>
       <Navbar url={"clase"} />
