@@ -1,16 +1,18 @@
 # starcatalog
 
+## Introducere
+StarCatalog este un catalog online creat pentru a monitoriza evoluția elevilor. Acest website oferă o gamă largă de funcționalități atât pentru cadrele didactice, cât și pentru elevi. StarCatalog ține evidența notelor, absențelor și clasamentelor elevilor, prezentând evoluția acestora în timp real și indicând dacă se încadrează pentru bursele de merit. Utilizarea platformei este extrem de simplă datorită interfeței sale prietenoase și estetice, ușor de navigat atât pentru cadrele didactice, cât și pentru elevi și familiile acestora.
 ## Getting Started
 
-Pentru a continua cu start-ul server-ului, trebuie sa ai [Node.js](https://nodejs.org/en) instalat
+Pentru a continua cu start-ul server-ului, trebuie sa aveti [Node.js](https://nodejs.org/en) instalat
 
-First, install the dependencies:
+Instalati dependintele:
 
 ```bash
 npm i
 ```
 
-Run the development server:
+Rulati server-ul de development (in caz ca doar modificati cod)
 
 ```bash
 npm run dev
@@ -22,15 +24,6 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Deschideti [http://localhost:3000](http://localhost:3000) pe un browser pentru a vedea pagina web.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Puteti incepe sa editati pagina de index prin editarea fisierului `pages/index.js`. Pagina din browser isi da refresh automat cand se face o schimbare.
