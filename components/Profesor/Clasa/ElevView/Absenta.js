@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styles from "@/styles/Profesor/Nota.module.css";
-export default function Nota({ nota, data, materie, cautaMaterie }) {
+export default function Absenta({ absenta, materie, cautaMaterie }) {
   const [apasat, setApasat] = useState(false);
   function submit() {
     if (apasat) return;
@@ -9,7 +9,8 @@ export default function Nota({ nota, data, materie, cautaMaterie }) {
       method: "POST",
       headers: {
         token: localStorage.getItem("access_token"),
-        idnota: nota.id,
+        idabsenta: absenta.id,
+        motiveaza: !absenta.motivata,
         materie: materie.normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
       },
     })
@@ -24,16 +25,16 @@ export default function Nota({ nota, data, materie, cautaMaterie }) {
   return (
     <div className={styles.buttonContainer}>
       <p style={{ margin: "0px" }}>
-        {nota.nota}
+        {`Absenta ${absenta.motivata ? "Motivata" : "Nemotivata"}`}
         {" - "}
-        <span style={{ color: "gray" }}>{nota.created_at}</span>
+        <span style={{ color: "gray" }}>{absenta.created_at}</span>
       </p>
       <div
         className={styles.button}
         style={{ clear: "both", whiteSpace: "nowrap" }}
         onClick={submit}
       >
-        Sterge
+        {absenta.motivata ? "Sterge" : "Motiveaza"}
       </div>
     </div>
   );

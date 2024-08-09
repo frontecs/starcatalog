@@ -17,8 +17,8 @@ export async function isProfesor(user_token) {
     .single();
 
   if (userData.materie.length == 0) {
-    return false;
+    return [false, userData];
   }
 
-  return true;
+  return [true, userData];
 }

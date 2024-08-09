@@ -3,8 +3,9 @@ import { isProfesor } from "@/utils/profesor/validareProfesor";
 
 export default async function handler(req, res) {
   const { token, id } = req.headers;
+  const [profesor] = await isProfesor(token);
 
-  if (!isProfesor(token)) {
+  if (!profesor) {
     return res.status(401).json({ error: "Invalid credentials." });
   }
 

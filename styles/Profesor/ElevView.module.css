@@ -19,6 +19,39 @@
   transition: ease-in-out 0.3s;
 }
 
+.addContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.button {
+  height: 20px;
+
+  display: flex;
+  align-items: center;
+  margin-top: 2px;
+
+  padding-left: 7px;
+  padding-right: 7px;
+
+  background-color: rgb(251, 249, 250);
+  border: 1px rgb(222, 222, 222) solid;
+  color: black;
+
+  border-radius: 0.33rem;
+  transition: 0.2s;
+
+  user-select: none;
+}
+
+.button:hover {
+  background-color: #333;
+  border: 1px gray solid;
+  color: white;
+  cursor: pointer;
+}
+
 .close {
   display: inline-flex;
   justify-content: center;
@@ -45,6 +78,27 @@
 .close:hover {
   border-color: red;
   border-radius: 0% 20% 50% 50%;
+}
+
+.modalContainer {
+  width: 70%;
+
+  display: none;
+  flex-direction: column;
+  gap: 0.33rem;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+
+  background-color: white;
+
+  border-radius: 0.33rem;
+  border: 2px solid rgb(222, 222, 222);
+
+  padding: 1rem;
 }
 
 @media (max-width: 500px) {

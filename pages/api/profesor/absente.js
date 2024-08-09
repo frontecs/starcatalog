@@ -21,7 +21,7 @@ export default async function handler(req, res) {
   });
 
   const { data: note, error: noteError } = await admin_supabase
-    .from("note")
+    .from("absente")
     .select("*")
     .eq("elev", elev)
     .eq("materie", id)

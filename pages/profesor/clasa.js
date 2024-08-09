@@ -16,6 +16,8 @@ export default function Clasa() {
   const [materii, setMaterii] = useState([]);
   const [materie, setMaterie] = useState("");
 
+  const [materiiCuPermisiuni, setMateriiCuPermisiuni] = useState([]);
+
   useEffect(() => {
     const queryParams = new URLSearchParams(window.location.search);
     const clasa = queryParams.get("clasa");
@@ -80,6 +82,8 @@ export default function Clasa() {
               materie={materie}
               setMaterie={setMaterie}
               materii={materii}
+              materiiCuPermisiuni={materiiCuPermisiuni}
+              setMateriiCuPermisiuni={setMateriiCuPermisiuni}
             />
             <LongButton
               key={`${elev.id}-button`}

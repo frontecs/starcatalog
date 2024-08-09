@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import styles from "@/styles/Profesor/ElevView.module.css";
 import Nota from "./ElevView/Nota";
+import Absenta from "./ElevView/Absenta";
+import Add from "./ElevView/Add";
 export default function ElevView({
   id,
   nume,
@@ -9,8 +11,11 @@ export default function ElevView({
   materie,
   setMaterie,
   materii,
+  materiiCuPermisiuni,
+  setMateriiCuPermisiuni,
 }) {
   const [note, setNote] = useState([]);
+  const [absente, setAbsente] = useState([]);
   function cautaMaterie(materie) {
     fetch(`/api/profesor/note`, {
       method: "GET",
@@ -29,6 +34,25 @@ export default function ElevView({
         }, 1);
         if (Object.values(data.materii).length === 0) return setNote([]);
         setNote(data.materii[1].note);
+      });
+
+    fetch(`/api/profesor/absente`, {
+      method: "GET",
+      headers: {
+        token: localStorage.getItem("access_token"),
+        elev: id,
+        materie: materie.normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        const elev = document.getElementById(`elevview-${id}`);
+        elev.style.display = "flex";
+        setTimeout(() => {
+          elev.style.opacity = 1;
+        }, 1);
+        if (Object.values(data.materii).length === 0) return setAbsente([]);
+        setAbsente(data.materii[1].note);
       });
   }
   useEffect(() => {
@@ -65,7 +89,7 @@ export default function ElevView({
         <h1 style={{ marginBottom: 0 }}>{nume}</h1>
         <p>Medie Generala: {medie}</p>
         <p>
-          Alege o materie:{" "}
+          Alege o materie:
           <select
             name="materie"
             id={`${id}-materie`}
@@ -78,10 +102,39 @@ export default function ElevView({
               </option>
             ))}
           </select>
+          <Add
+            id={id}
+            materie={materie}
+            materiiCuPermisiuni={materiiCuPermisiuni}
+            setMateriiCuPermisiuni={setMateriiCuPermisiuni}
+            cautaMaterie={cautaMaterie}
+          />
         </p>
-        <div style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "2px",
+            marginBottom: "10px",
+          }}
+        >
           {note.map((nota) => (
-            <Nota nota={nota.nota} data={nota.created_at} />
+            <Nota
+              nota={nota}
+              cautaMaterie={cautaMaterie}
+              materie={materie}
+              key={nota.id}
+            />
+          ))}
+        </div>
+        <div style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
+          {absente.map((nota) => (
+            <Absenta
+              absenta={nota}
+              cautaMaterie={() => cautaMaterie(materie)}
+              materie={materie}
+              key={nota.id}
+            />
           ))}
         </div>
       </div>
